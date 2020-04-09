@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Cities";
+}
+
+@section PageScripts
+{
+    <script src="~/js/Home/cities.js"></script>
+}
+
+<h3>Cities</h3>
+
+<h4>Nieuwe stad</h4>
+
+Naam:
+<br />
+<input type="text" id="txtCityName" />
+
+<br />
+<br />
+
+Inwoners:
+<br />
+<input type="text" id="txtPopulation" />
+
+<br />
+<br />
+Land:
+<br />
+<input type="text" id="txtCountry" />
+
+<br />
+<br />
+Jaar:
+<br />
+<input type="text" id="txtYear" />
+
+<br />
+<br />
+
+<input type="button" value="toevoegen" onclick="postCity();" />
+
+
+<hr />
+
+<input type="button" value="Get steden" onclick="getCities();" />
+
+<br />
+<br />
+
+<div id="output">
+
+</div>
+

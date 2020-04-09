@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MvcCursus</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site_tablet.css" media="max-width: 900px" />
+    <link rel="stylesheet" href="~/css/site_phone.css" media="max-width: 600px" />
+
+    @*<script src="https://code.jquery.com/jquery-3.4.1.js"></script>*@
+
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/vue/dist/vue.js"></script>
+
+    <!-- Deze twee scripts zijn voor client side validatie -->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/js/layout.js"></script>
+
+    @RenderSection("PageScripts", false)
+
+
+</head>
+<body onload="ShowTime(); setInterval(ShowTime, 1000);">
+
+    <header>Mijn website</header>
+
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Home page</a>
+        <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a asp-controller="Home" asp-action="Contact">Contact</a>
+        <a asp-controller="Home" asp-action="Students">Students</a>
+        <a asp-controller="Teams" asp-action="Index">Teams</a>
+
+        <a asp-controller="Membership" asp-action="Index">Memberships</a>
+
+        <a asp-controller="Home" asp-action="Countries">Countries</a>
+        <a asp-controller="Home" asp-action="Cities">Cities</a>
+
+
+    </nav>
+
+    <p id="tijdstip">Hier komt de tijd</p>
+
+    <p>
+        Hallo @User.Identity.Name
+    </p>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await Html.PartialAsync("_Copyright")
+
+</body>
+</html>

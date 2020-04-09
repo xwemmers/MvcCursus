@@ -1,0 +1,45 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3>Wijzig student met ID = @Model.StudentID</h3>
+
+<form method="post">
+
+    <input asp-for="StudentID" type="hidden" />
+
+    Voornaam:<br />
+    <input asp-for="Firstname" />
+    <span asp-validation-for="Firstname"></span>
+    <br />
+    <br />
+
+    Achternaam:<br />
+    <input asp-for="Lastname" />
+    <span asp-validation-for="Lastname"></span>
+    <br />
+    <br />
+
+    Geboortedatum:<br />
+    <input asp-for="DateOfBirth" />
+    <span asp-validation-for="DateOfBirth"></span>
+    <br />
+    <br />
+
+    <input type="submit" value="Opslaan" />
+
+
+</form>
+
+<hr />
+
+<h3>@Model.Fullname is lid van de volgende teams:</h3>
+
+<ul>
+    @foreach(var m in Model.Memberships)
+    {
+        <li>@m.Team.Name</li>
+    }
+</ul>

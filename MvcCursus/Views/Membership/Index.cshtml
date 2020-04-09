@@ -1,0 +1,49 @@
+﻿@using MvcCursus.ViewModels
+
+@model IEnumerable<JoinedMembership>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post">
+
+    <p>
+        <select name="StudentID" asp-items="@ViewBag.Students"></select>
+
+        <select name="TeamID" asp-items="@ViewBag.Teams"></select>
+
+        <input type="submit" value="Add membership" />
+    </p>
+
+</form>
+
+
+<table>
+
+    <thead>
+        <tr>
+            <td>Team naam</td>
+            <td>Team beschrijving</td>
+            <td>Voornaam</td>
+            <td>Achternaam</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (JoinedMembership m in Model)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.Description</td>
+                <td>@m.Firstname</td>
+                <td>@m.Lastname</td>
+
+                <td><a asp-controller="Membership" asp-action="Delete" asp-route-id="@m.MembershipID">delete</a></td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+

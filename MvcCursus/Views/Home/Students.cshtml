@@ -1,0 +1,76 @@
+﻿@model List<Student>
+
+@{
+
+    ViewData["Title"] = "Students";
+}
+
+<h3>Er zijn @Model.Count studenten.</h3>
+
+<form method="post">
+    <p>
+        Zoek op naam: <input type="text" name="search" value="@ViewBag.SearchText" placeholder="voornaam" />
+
+        <input type="submit" value="Zoeken" />
+    </p>
+</form>
+
+<p>
+    <a asp-controller="Home" asp-action="Create">Voeg student toe</a>
+</p>
+
+
+<table>
+
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Voornaam</td>
+            <td>Achternaam</td>
+            <td>@Html.DisplayNameFor(x => Model[0].DateOfBirth)</td>
+            <td colspan="2" align="center">actions</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var st in Model)
+        {
+            <tr>
+                <td>@st.StudentID</td>
+                <td>@st.Firstname</td>
+                <td>@st.Lastname</td>
+                <td>@Html.DisplayFor(x => st.DateOfBirth)</td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@st.StudentID">edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@st.StudentID">delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+@if (ViewBag.PageNumber > 0)
+{
+    <a asp-controller="Home" asp-action="Students" asp-route-p="@(ViewBag.PageNumber - 1)" asp-route-s="@ViewBag.PageSize">vorige pagina</a>
+}
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<a asp-controller="Home" asp-action="Students" asp-route-p="@(ViewBag.PageNumber + 1)" asp-route-s="@ViewBag.PageSize">volgende pagina</a>
+
+<br /><br />
+
+<hr />
+
+<br />
+
+<p class="warning">
+    @TempData["ErrorMessage"]
+</p>
+
+<p class="warning">
+    @TempData["TechnicalMessage"]
+</p>

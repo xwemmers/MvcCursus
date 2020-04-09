@@ -1,0 +1,123 @@
+﻿
+html, body {
+    /* Zet dit er bij omdat je anders de twee pixels witruimte krijgt (en dat vinden we niet mooi....) */
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Constantia;
+}
+
+header {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 150%;
+}
+
+nav {
+    background-color: darkseagreen;
+    text-align: center;
+    padding: 10px;
+}
+
+    nav a {
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+main {
+    margin: 20px 50px 0 50px; /*  top-right-bottom-left   */
+}
+
+table {
+    border-spacing: 0;
+}
+
+td {
+    padding: 10px;
+}
+
+thead tr:first-child {
+    background-color: darkseagreen;
+}
+
+a {
+    color: darkseagreen;
+}
+
+.btn-danger {
+    color: white;
+    background-color: green;
+    border: 1px solid green;
+    transition: all 1s;
+}
+
+    .btn-danger:hover {
+        border: 1px solid green;
+        color: green;
+        background-color: white;
+        transition: all 1s;
+        transform: rotate(360deg) scale(2);
+    }
+
+
+.col-sm-2 {
+    width: 200px;
+}
+
+.warning {
+    color: red;
+    font-style: italic;
+}
+
+#tijdstip {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    color: white;
+}
+
+
+@media (max-width: 900px)
+{
+    img {
+        width: 50px;
+    }
+
+}
+
+@media (max-width: 700px)
+{
+    /* Deze property is niet zero-based maar one-based dus column 5 is de vlag */
+    #countriesTable td:nth-child(5) {
+        display: none;
+    }
+
+    
+
+    header {
+        font-size: 50%;
+    }
+}
+
+
+/* Als je de pagina wilt printen dan een witte achtergrond */
+@media (print) {
+    body {
+        background-color: white;
+    }
+}
+
+@media (orientation: landscape) {
+    /* Als iemand zijn telefoon kantelt */
+}
+
+@media (orientation: portrait) {
+    /* Als iemand zijn telefoon kantelt */
+}
+

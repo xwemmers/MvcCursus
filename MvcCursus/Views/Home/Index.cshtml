@@ -1,0 +1,35 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<p>
+    Na lunch: Razor om de HTML dynamisch te maken. Razor is een combinatie van HTML en C#.
+</p>
+
+<p>
+    Deze pagina is gegenereerd om @DateTime.Now.ToString("HH:mm:ss"). De datum is @DateTime.Now.ToString("dd-MM-yyyy").
+</p>
+
+@for (int i = 1; i <= 10; i++)
+{
+    <p>
+        Dit is paragraaf nummer @i.
+    </p>
+}
+
+<h2>Er zijn @Model.Length namen.</h2>
+
+@foreach(string naam in Model)
+{
+    <p>
+        Hallo @naam.
+    </p>
+}

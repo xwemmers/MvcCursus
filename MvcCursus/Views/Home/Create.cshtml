@@ -1,0 +1,49 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section PageScripts
+{
+    <script src="~/js/Home/create.js"></script>
+}
+
+<h3>Nieuwe student</h3>
+
+<form method="post">
+
+    Voornaam:<br />
+
+    <input class="invoer" asp-for="Firstname" id="txtFirstname" />
+
+    <span asp-validation-for="Firstname"></span>
+
+    <br /><br />
+
+    Achternaam:<br />
+
+    <input class="invoer" asp-for="Lastname" id="txtLastname" />
+
+    <span asp-validation-for="Lastname"></span>
+
+    <br /><br />
+
+    Geboortedatum:<br />
+
+    <input class="invoer" asp-for="DateOfBirth" id="txtDateOfBirth" />
+
+    <span asp-validation-for="DateOfBirth"></span>
+
+    <br /><br />
+
+    <input type="submit" value="opslaan in DB" />
+    
+    <input type="button" value="wis formulier" onclick="wisFormulier();" />
+
+    <input type="button" value="tijdelijk opslaan" onclick="saveLocal();" />
+    
+    <input type="button" value="lees localStorage" onclick="loadLocal();" />
+
+</form>
+
