@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "ChatBox";
+}
+
+
+@section PageScripts
+{
+    <script src="~/node_modules/@@aspnet/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+        var cn = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
+
+        cn.on("NewMessage", function (sender, msg) {
+            //console.log(sender + ": " + msg);
+
+            var div = document.createElement("div");
+            div.innerHTML = sender;
+            div.className = "chatname";
+
+            document.getElementById("output").appendChild(div);
+
+            div = document.createElement("div");
+            div.innerHTML = msg;
+            div.className = "chatmessage";
+
+            document.getElementById("output").appendChild(div);
+        });
+
+        cn.on("NewLogin", function (name) {
+            var div = document.createElement("div");
+            div.innerHTML = "Login van " + name;
+            div.className = "login";
+
+            document.getElementById("output").appendChild(div);
+        });
+
+        // Connectie openen
+        cn.start();
+
+        function sendMessage() {
+            cn.invoke("SendMessage", $("#txtName").val(), $("#txtChat").val());
+        }
+
+        function login() {
+            cn.invoke("Login", $("#txtName").val());
+        }
+
+    </script>
+}
+
+
+<h3>ChatBox</h3>
+
+<br />
+<br />
+
+Naam:
+<br />
+<input type="text" id="txtName" />
+<input type="button" value="Log in" onclick="login();" />
+
+<br />
+<br />
+
+Chat:
+<br />
+<input type="text" id="txtChat" />
+
+<br />
+<br />
+
+<input type="button" onclick="sendMessage();" value="chat" />
+
+<br />
+<br />
+
+
+<div id="output">
+
+</div>
+
+
+<br />
+<br />
+<br />

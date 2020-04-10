@@ -9,25 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MvcCursus.Models;
 
+using Microsoft.AspNetCore.Http;
+
 namespace MvcCursus.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
 
         //[AllowAnonymous]
         public IActionResult Login()
         {
-
-
-            string sql = "update table ...  where name = @name ";
-
-
-
             return View();
         }
-
-
 
         // Class level variabele om in deze controller de DB te benaderen
         MyDbContext _ctx;
@@ -43,6 +37,10 @@ namespace MvcCursus.Controllers
 
         public IActionResult Index()
         {
+            int teller = HttpContext.Session.GetInt32("Counter") ?? 0;
+            HttpContext.Session.SetInt32("Counter", teller + 1);
+
+            HttpContext.Session.SetString("TEST", "Test sessie geslaagd!");
 
 
             // De controller geeft data aan de view mee.
@@ -239,7 +237,7 @@ namespace MvcCursus.Controllers
         public IActionResult AllMemberships(int id)
         {
             var all = from m in _ctx.Memberships
-                      //where m.Team.TeamID == id
+                          //where m.Team.TeamID == id
                       select new
                       {
                           m.Student.Firstname,
@@ -251,6 +249,17 @@ namespace MvcCursus.Controllers
 
             return Json(all.ToList());
         }
+
+        public IActionResult ChatBox()
+        {
+            return View();
+        }
+
+        public IActionResult StudentsVue()
+        {
+            return View();
+        }
+
 
     }
 }

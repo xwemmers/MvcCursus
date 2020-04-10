@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 using MvcCursus.MiddleWare;
 using Microsoft.AspNetCore.Server.IISIntegration;
+using MvcCursus.Hubs;
 
 namespace MvcCursus
 {
@@ -37,6 +38,11 @@ namespace MvcCursus
                         options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("cursusdb")));
             // De method UseLazyLoading() zit in de NuGet package Microsoft.EntityFrameworkCore.Proxies
 
+            services.AddSignalR();
+
+            // Na 20 minuten is de sessie weer leeg
+            // Alternatieven? LocalStorage
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(20));
 
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
         }
@@ -57,6 +63,10 @@ namespace MvcCursus
 
             // Deze aanroep forceert de gebruiker naar de https variant toe
             app.UseHttpsRedirection();
+
+            app.UseSignalR(options => options.MapHub<ChatHub>("/chathub"));
+
+            app.UseSession();
 
             // Deze aanroep zorgt er voor dat bestanden in wwwroot gevonden kunnen worden
             // Doe je deze aanroep niet dan werkt heel veel wel, maar de CSS kan niet worden gevonden

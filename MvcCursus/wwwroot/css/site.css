@@ -121,3 +121,18 @@ a {
     /* Als iemand zijn telefoon kantelt */
 }
 
+.chatname
+{
+    background-color: darkseagreen;
+    padding: 0 20px;
+}
+
+.chatmessage {
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.login {
+    background-color: lightgreen;
+    font-style: italic;
+}

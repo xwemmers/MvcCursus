@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "StudentsVue";
+}
+
+@section PageScripts
+{
+    <script src="~/node_modules/vue/dist/vue.js"></script>
+    <script src="~/node_modules/axios/dist/axios.js"></script>
+
+    <script>
+
+        var vm;
+
+        function initVue() {
+            vm = new Vue({
+                el: "#root",
+                data: {
+                    students: [],
+                    newstudent: {
+                        firstname: "",
+                        lastname: "",
+                        dateOfBirth: ""
+                    }
+                },
+                methods: {
+                    deleteStudent: function (id) {
+                        axios.delete("/api/student2/" + id).then(getStudents);
+                    }
+                }
+            });
+
+            getStudents();
+        }
+
+        function createStudent() {
+            axios.post("/api/student2", vm.newstudent).then(getStudents);
+        }
+
+        function getStudents() {
+            axios.get("/api/student").then(response => vm.students = response.data);
+        }
+
+        $(document).ready(initVue);
+
+    </script>
+}
+
+<div id="root">
+
+    <h3>Students with Vue JS</h3>
+
+    Voornaam:
+    <br />
+    <input type="text" v-model="newstudent.firstname" />
+
+    <br />
+    <br />
+
+    Achternaam:
+    <br />
+    <input type="text" v-model="newstudent.lastname" />
+
+    <br />
+    <br />
+
+    Geboortedatum:
+    <br />
+    <input type="date" v-model="newstudent.dateOfBirth" />
+
+    <br />
+    <br />
+    <input type="button" value="create student" onclick="createStudent();" />
+
+    <br /><br />
+
+    <p>
+        Alle {{ students.length }} studenten:
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Voornaam</td>
+                <td>Achternaam</td>
+                <td>Geboortedatum</td>
+            </tr>
+        </thead>
+        <tr v-for="s in students">
+            <td>{{ s.studentID }}</td>
+            <td>{{ s.firstname }}</td>
+            <td>{{ s.lastname }}</td>
+            <td>{{ s.dateOfBirth.substring(0,10) }}</td>
+            <td><input type="button" value="X" v-on:click="deleteStudent(s.studentID)" /></td>
+        </tr>
+    </table>
+
+</div>
